@@ -1,11 +1,17 @@
 import React from 'react'; 
+import Navbar from "./components/Navbar";
+import Content from "./components/Content";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 const App = () => {
     return (
-        <div className='w-screen h-full flex justify-center items-center bg-black text-white'>
-            App
-        </div>
+        <BrowserRouter>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Content />} />
+            </Routes>
+        </BrowserRouter>
     )
 }
 
