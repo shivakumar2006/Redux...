@@ -1,9 +1,11 @@
 import React, { useState } from 'react'; 
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
 
     const [ searchTerm, setSearchTerm ] = useState(''); 
+    const allUsers = useSelector((state) => state.app.users);
 
     return (
         <div className='w-full h-20 bg-content flex flex-wrap items-center'>
@@ -16,7 +18,7 @@ const Navbar = () => {
                 <Link to="/home">Create Post</Link>
             </div>
             <div className='text-white ml-10 cursor-pointer'>
-                <Link to="/read">All Post</Link>
+                <Link to="/read">All Post ({allUsers.length})</Link>
             </div>
             <input 
                 type="text"

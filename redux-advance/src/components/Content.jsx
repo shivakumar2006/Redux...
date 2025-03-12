@@ -15,8 +15,6 @@ const Content = () => {
         ...prevUsers,
             [e.target.name] : e.target.value
        }))
-
-        console.log(users);
     }
 
     const handleSubmit = (e) => {
