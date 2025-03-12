@@ -1,4 +1,5 @@
 import React, { useState } from 'react'; 
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 
@@ -8,14 +9,14 @@ const Navbar = () => {
         <div className='w-full h-20 bg-content flex flex-wrap items-center'>
             {/* logo */}
             <div className='text-3xl text-white ml-5 cursor-pointer'>
-                RTK 
+                <Link to="/">RTK</Link> 
             </div>
             {/* links */}
             <div className='text-white ml-10 cursor-pointer'>
-                Create Post 
+                <Link to="/home">Create Post</Link>
             </div>
             <div className='text-white ml-10 cursor-pointer'>
-                All Post
+                <Link to="/read">All Post</Link>
             </div>
             <input 
                 type="text"

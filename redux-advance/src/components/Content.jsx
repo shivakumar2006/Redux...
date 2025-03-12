@@ -1,26 +1,36 @@
 import React, { useState } from 'react'; 
 import { useDispatch } from "react-redux";
+import { createUser } from '../features/slices/slice';
+import { useNavigate } from 'react-router-dom';
 
 const Content = () => {
-
-    // const [ selectGender, setSelectGender ] = useState(null);
-
-    // const handleGenderSelect = (gender) => {
-    //     setSelectGender(prevGender => (prevGender === gender ? null : gender));
-    // } 
 
     const [ users, setUsers ] = useState();
 
     const dispatch = useDispatch();
+    const Navigate = useNavigate();
 
     const getUserData = (e) => {
-        setUsers({...users, [e.target.name] : e.target.value})
+       setUsers(prevUsers => ({
+        ...prevUsers,
+            [e.target.name] : e.target.value
+       }))
 
         console.log(users);
     }
 
-    const handleSubmit = () => {
-        dispatch()
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // check if al the fields are fill
+        if (!(users?.name || users?.email || users?.age || users?.gender)) {
+            alert("Please fill out all the fields before submitting...");
+            return;
+        }
+
+        dispatch(createUser(users))
+        console.log("users...", users);
+        Navigate("/read");
     }
 
     return (
@@ -64,6 +74,7 @@ const Content = () => {
                     type='radio' 
                     name="gender"
                     value="Male"
+                    onChange={getUserData}
                 />
                 <label className="ml-4">Male</label>
 
@@ -72,13 +83,14 @@ const Content = () => {
                     type='radio' 
                     name='gender'
                     value="Female"
+                    onChange={getUserData}
                 />
                 <label className="ml-4">Female</label>
             </div>
             <div className='flex justify-center items-center mt-8'>
                 <button 
                     className='w-20 h-10 bg-blue-700 border-0 text-white rounded hover:bg-blue-600 cursor-pointer'
-                    onSubmit={handleSubmit}
+                    onClick={handleSubmit}
                 > 
                     Submit 
                 </button>
