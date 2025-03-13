@@ -12,7 +12,7 @@ const Read = () => {
     const [ id, setId ] = useState(null);
     const [ showPopup, setShowPopup ] = useState(false);
 
-    const { users, loading, error } = useSelector((state) => state.app);
+    const { users, loading, error, searchUser} = useSelector((state) => state.app);
 
     useEffect(() => {
         dispatch(getUser());
@@ -34,7 +34,13 @@ const Read = () => {
         <>
             { showPopup && <CreateCard id={id} showPopup={showPopup} setShowPopup={setShowPopup} /> }
             <h1 className='mt-10 text-4xl flex justify-center items-center'>Users list</h1>
-            {users && users?.map((user) => (
+            {users && users.filter((user) => {
+                if(searchUser.length === 0) {
+                    return user 
+                } else {
+                    return user.name.toLowerCase().includes(searchUser.toLowerCase());
+                }
+            }).map((user) => (
             <div key={user.id} className='w-180 h-50 bg-read mx-90 my-10 py-2 rounded-3xl'>
                 <h1 className='text-3xl mt-2 flex justify-center items-center'
                 >

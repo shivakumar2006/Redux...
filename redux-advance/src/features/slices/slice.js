@@ -67,7 +67,14 @@ export const userDetail = createSlice({
         users: [],
         loading: false,
         error: null,
+        searchUser: [],
     },
+    reducers: {
+        searchUser: (state, action) => {
+            state.searchUser = action.payload;
+        }
+    },
+
     extraReducers : (builder) => {
         builder
         // create User
@@ -137,3 +144,5 @@ export const userDetail = createSlice({
 })
 
 export default userDetail.reducer;
+
+export const {searchUser} = userDetail.actions;
