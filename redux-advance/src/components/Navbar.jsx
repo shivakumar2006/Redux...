@@ -1,37 +1,28 @@
-import React, { useState, useEffect } from 'react'; 
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from "react-redux";
-import { searchUser } from '../features/slices/slice';
+import React from 'react'; 
+import { FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
-
-    const [ searchTerm, setSearchTerm ] = useState('');
-    const dispatch = useDispatch(); 
-    const allUsers = useSelector((state) => state.app.users);
-
-    useEffect(() => {
-        dispatch(searchUser(searchTerm));
-    }, [searchTerm])
-
     return (
-        <div className='w-full h-20 bg-content flex flex-wrap items-center'>
-            {/* logo */}
-            <div className='text-3xl text-white ml-5 cursor-pointer'>
-                <Link to="/">RTK</Link> 
+        <div className='w-full h-20 text-white bg-blue-500 flex flex-row justify-between items-center shadow-2xl'>
+            <h1 className='text-3xl ml-5'>Navbar</h1>
+            <div className='w-250 h-20 text-white flex flex-row justify-evenly items-center gap-10'>
+                <button className='w-40 h-10 bg-black/10 rounded hover:bg-black/30 shadow-lg cursor-pointer'>
+                    All Products 
+                </button>
+                <button className='w-40 h-10 bg-black/10 rounded hover:bg-black/30 shadow-lg cursor-pointer'>
+                    Cart
+                </button>
             </div>
-            {/* links */}
-            <div className='text-white ml-10 cursor-pointer'>
-                <Link to="/home">Create Post</Link>
+            <div className='flex flex-end'>
+                <div className='relative'>
+                    <FaSearch className='absolute top-1/2 left-8 transform -translate-y-1/2 text-gray-200 hover:text-gray-400' />
+                    <input
+                        type='text'
+                        className='w-60 h-10 mx-5 border-white border-1 rounded px-10 bg-black/10 hover:placeholder-gray-300 hover:bg-black/30'
+                        placeholder='Search...'
+                    />
+                </div>
             </div>
-            <div className='text-white ml-10 cursor-pointer'>
-                <Link to="/read">All Post ({allUsers.length})</Link>
-            </div>
-            <input 
-                type="text"
-                className='w-200 h-10 bg-white ml-10 pl-black rounded border-2 px-5'
-                placeholder='Search...'
-                onChange={(e) => setSearchTerm(e.target.value)}
-            />
         </div>
     )
 }
