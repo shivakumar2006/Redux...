@@ -1,21 +1,31 @@
 import React from 'react'; 
-import car  from "../images/car.jpg";
+import { useSelector, useDispatch } from 'react-redux';
 
 const ProductsCards = () => {
+
+    const items = useSelector((state) => state.cart.items);
+    const dispatch = useDispatch();
+
     return (
         <div className='w-screen h-screen flex flex-wrap justify-between text-black'>
-            <div className='w-100 h-102 my-5 mx-5 rounded-2xl bg-gray-200 overflow-hidden'>
+            {items?.map((item) => (
+            <div key={item.id} className='w-100 h-100 my-5 mx-5 rounded-2xl bg-gray-200 overflow-hidden shadow-xl'>
                 <img 
-                    src={car}
-                    className='w-100 h-55 rounded-t-2xl bg-gray-500 object-cover cursor-pointer transform transition-transform duration-300 hover:scale-105'
+                    src={item.img}
+                    className='w-100 h-55 rounded-t-2xl bg-gray-500 object-contain cursor-pointer transform transition-transform duration-300 hover:scale-105'
                 />
-                <p className='my-2 mx-4'>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores ut facilis tempora distinctio ducimus vitae eveniet. Accusantium vel molestias fugit doloribus possimus, nobis sit, nulla repellendus voluptate incidunt quaerat id.
+                <h1 className='my-2 mx-4 text-2xl '>{item.title}</h1>
+                <p className='my-3 mx-4'>
+                    Rs.{item.price}/-
                 </p>
-                <button className='w-30 h-10 mx-4 mb-2 bg-blue-500 rounded text-white hover:bg-blue-700 cursor-pointer shadow-xl hover:shadow-2xl'>
-                    Click
+                <button 
+                    className='w-30 h-10 mx-4 my-3 bg-blue-500 rounded text-white hover:bg-blue-700 cursor-pointer shadow-xl hover:shadow-2xl'
+                    onClick={() => dispatch(addToCart(item))}
+                >
+                    Add to cart
                 </button>
             </div>
+            ))}
         </div>
     )
 }
