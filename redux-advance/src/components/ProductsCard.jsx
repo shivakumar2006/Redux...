@@ -1,13 +1,14 @@
 import React from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
+import { addToCart } from '../features/CartSlice';
 
 const ProductsCards = () => {
 
-    const items = useSelector((state) => state.cart.items);
+    const items = useSelector((state) => state.allCart.items);
     const dispatch = useDispatch();
 
     return (
-        <div className='w-screen h-screen flex flex-wrap justify-between text-black'>
+        <div className='w-screen h-screen mt-25 flex flex-wrap justify-between text-black'>
             {items?.map((item) => (
             <div key={item.id} className='w-100 h-100 my-5 mx-5 rounded-2xl bg-gray-200 overflow-hidden shadow-xl'>
                 <img 
