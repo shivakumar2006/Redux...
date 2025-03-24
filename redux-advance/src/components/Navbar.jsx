@@ -1,9 +1,11 @@
 import React from 'react'; 
 import { FaSearch } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
 
+    const { totalQuantity } = useSelector((state) => state.allCart);
 
     return (
         <div className='w-full h-20 text-white bg-blue-500 flex flex-row justify-between items-center shadow-2xl fixed top-0 left-0 z-50'>
@@ -17,6 +19,27 @@ const Navbar = () => {
                     className="w-20 h-20 flex items-center cursor-pointer text-white rounded-full transition-all duration-300"
                 >
                     Cart
+                    {totalQuantity > 0 && (
+                        <div 
+                        className="w-5 h-5 mb-5 bg-red-500 rounded-full text-white flex items-center justify-center"
+                    >
+                        {totalQuantity}
+                    </div>
+                    )}
+                        
+                    
+                </Link>
+                <Link to="/fav"
+                    className='w-30 h-20 flex items-center cursor-pointer text-white rounded-ful tenasition-all suration-300'
+                >
+                    Wishlist 
+                    {totalQuantity > 0 && (
+                        <div
+                            className='w-5 h-5 mb-5 bg-red-500 rounded-full text-white flex items-center justify-center'
+                        >
+                            {totalQuantity}
+                        </div>
+                    )}
                 </Link>
             </div>
             <div className='flex flex-end'>
@@ -24,6 +47,7 @@ const Navbar = () => {
                     <FaSearch className='absolute top-1/2 left-8 transform -translate-y-1/2 text-gray-200 hover:text-gray-400' />
                     <input
                         type='text'
+                        defaultValue=''
                         className='w-60 h-10 mx-5 border-white border-1 rounded px-10 bg-black/10 hover:placeholder-gray-300 hover:bg-black/30'
                         placeholder='Search...'
                     />

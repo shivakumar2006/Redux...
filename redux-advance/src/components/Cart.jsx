@@ -1,12 +1,20 @@
-import React from 'react'; 
+import React, { useEffect } from 'react'; 
 import { MdDelete } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
-import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCartTotal, removeItem, increaseQuantity, decreaseQuantity, addToWishList } from '../features/CartSlice';
 
 const Cart = () => {
 
     const { cart, totalQuantity, totalPrice } = useSelector((state) => state.allCart)
+    const dispatch = useDispatch();
+    const Navigate = useNavigate();
 
+    useEffect(() => {
+        dispatch(getCartTotal());
+    }, [cart, dispatch])
+    
 
     return (
         <div
@@ -15,9 +23,9 @@ const Cart = () => {
               background: 'linear-gradient(90deg, rgba(171,3,245,1) 0%, rgba(96,47,140,1) 35%, rgba(44,105,156,1) 55%, rgba(0,212,255,1) 100%)'
             }}
         >   
-            <div className={`w-230 h-auto my-20 mr-100 bg-white rounded-2xl flex flex-col overflow-auto ${cart.length === 0 ? 'mb-85' : ''}`}>
+            <div className={`w-230 h-auto mb-55 mr-100 bg-white rounded-2xl flex flex-col overflow-auto ${cart.length === 0 ? 'mb-65' : ''}`}>
                 <div className='w-230 h-20 py-6 px-5 text-2xl text-gray-500 bg-white border-b-1 border-gray-500 shadow-xl rounded-t-2xl '>
-                    Cart - {totalQuantity} items
+                    Cart - {cart.length} items
                 </div>
 
                 {/* Check if the cart is empty */}
@@ -37,20 +45,29 @@ const Cart = () => {
                         >
                             {data.title}
                         </h1>
-                        <h1 className='text-gray-600 my-5'>Color: blue</h1>
-                        <h1 className='text-gray-600 my-5'>Size: M</h1>
+                        {/* <h1 className='text-gray-600 my-5'>Color: blue</h1>
+                        <h1 className='text-gray-600 my-5'>Size: M</h1> */}
                         <div className='flex flex-row '>
-                            <button className='w-12 h-10 my-5 mx-2 bg-blue-500 px-4 shadow-xl rounded text-white hover:bg-blue-700 cursor-pointers'>
+                            <button 
+                                className='w-12 h-10 my-5 mx-2 bg-blue-500 px-4 shadow-xl rounded text-white hover:bg-blue-700 cursor-pointer'
+                                onClick={() => dispatch(removeItem(data.id))}
+                            >
                                 <MdDelete />
                             </button>
-                            <button className='w-12 h-10 mx-2 my-5 bg-red-500 px-4 shadow-xl rounded text-white hover:bg-red-700 cursor-pointers'>
+                            <button 
+                                className='w-12 h-10 mx-2 my-5 bg-red-500 px-4 shadow-xl rounded text-white hover:bg-red-700 cursor-pointer'
+                                onClick={() => dispatch(addToWishList(data.id))}
+                            >
                                 <FaHeart />
                             </button>
                         </div>
                     </div>
                     <div className='w-70 h-80 my-5 flex flex-col justify-center items-center'>
                         <div className='flex mb-50'>
-                        <button className='w-12 h-10 bg-blue-500 px-4 shadow-xl rounded text-white hover:bg-blue-700 cursor-pointer'>
+                        <button 
+                            className='w-12 h-10 bg-blue-500 px-4 shadow-xl rounded text-white hover:bg-blue-700 cursor-pointer'
+                            onClick={() => dispatch(decreaseQuantity(data.id))}
+                        >
                             -
                         </button>
                         <input 
@@ -59,12 +76,15 @@ const Cart = () => {
                             placeholder='Quantity'
                             value={data.quantity}
                         />
-                        <button className='w-12 h-10 bg-blue-500 px-4 shadow-xl rounded text-white hover:bg-blue-700 cursor-pointer'>
+                        <button 
+                            className='w-12 h-10 bg-blue-500 px-4 shadow-xl rounded text-white hover:bg-blue-700 cursor-pointer'
+                            onClick={() => dispatch(increaseQuantity(data.id))}    
+                        >
                             +
                         </button>
                         </div>
                         <p className='text-2xl'>Total price</p>
-                        <p className='mx-3'>Rs.{data.price} /-</p>
+                        <p className='mx-3'>Rs.{data.price * data.quantity} /-</p>
                     </div>
                 </div>
                 ))
@@ -82,10 +102,13 @@ const Cart = () => {
                 </div>
                 <div className='my-10 mx-2 flex flex-row justify-between items-center'>
                     <p>Total Price</p>
-                    <p>{totalPrice}</p>
+                    <p>Rs.{totalPrice}</p>
                 </div>
                 <div className='flex items-center justify-center'>
-                <button className='w-75 h-13 text-2xl rounded flex justify-center items-center text-white bg-blue-500 hover:bg-blue-700'>
+                <button 
+                    className='w-75 h-13 text-2xl rounded flex justify-center items-center text-white bg-blue-500 hover:bg-blue-700 cursor-pointer'
+                    onClick={() => Navigate("/check")}
+                >
                     Go to checkout 
                 </button>
                 </div>
