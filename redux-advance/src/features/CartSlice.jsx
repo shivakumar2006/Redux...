@@ -3,7 +3,6 @@ import ProductData from "../data/ProductData";
 
 const initialState = { 
     cart: [],
-    wishlist: [],
     items: ProductData,
     totalQuantity: 0,
     totalPrice: 0,
@@ -59,15 +58,6 @@ export const cartSlice = createSlice({
                 return item;
             })
         },
-        addToWishList: (state, action) => {
-            const exist = state.wishlist.some((item) => item.id === action.payload.id);
-            if(!exist) {
-                state.wishlist.push(action.payload);
-            }
-        },
-        removeFromWishlist: (state, action) => {
-            state.wishlist = state.wishlist.filter((item) => item.id !== action.payload);
-        }
     },
 })
 

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 const Navbar = () => {
 
     const { totalQuantity } = useSelector((state) => state.allCart);
+    const { totalwishlistQuantity } = useSelector((state) => state.fullWishList);
 
     return (
         <div className='w-full h-20 text-white bg-blue-500 flex flex-row justify-between items-center shadow-2xl fixed top-0 left-0 z-50'>
@@ -30,14 +31,14 @@ const Navbar = () => {
                     
                 </Link>
                 <Link to="/fav"
-                    className='w-30 h-20 flex items-center cursor-pointer text-white rounded-ful tenasition-all suration-300'
+                    className='w-30 h-20 flex items-center cursor-pointer text-white rounded-full transition-all duration-300'
                 >
                     Wishlist 
-                    {totalQuantity > 0 && (
+                    {totalwishlistQuantity > 0 && (
                         <div
                             className='w-5 h-5 mb-5 bg-red-500 rounded-full text-white flex items-center justify-center'
                         >
-                            {totalQuantity}
+                            {totalwishlistQuantity}
                         </div>
                     )}
                 </Link>

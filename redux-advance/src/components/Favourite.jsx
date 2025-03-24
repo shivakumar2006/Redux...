@@ -1,20 +1,20 @@
 import React from 'react';
 import { MdDelete } from "react-icons/md";
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromWishlist } from '../features/CartSlice';
+import { removeFromWishlist } from '../features/WishListSlice';
 
 const Favourites = () => {
   const dispatch = useDispatch();
-  const { wishlist } = useSelector((state) => state.allCart);
+  const { wishlist } = useSelector((state) => state.fullWishList);
 
   return (
     <div
-      className="w-screen min-h-screen mt-20 flex justify-evenly items-center shadow-xl relative"
+      className="w-screen min-h-screen mt-20 flex justify-center items-center shadow-xl relative"
       style={{
         background: 'linear-gradient(90deg, rgba(171,3,245,1) 0%, rgba(96,47,140,1) 35%, rgba(44,105,156,1) 55%, rgba(0,212,255,1) 100%)'
       }}
     >
-      <div className={`w-230 h-auto my-20 mr-100 bg-white rounded-2xl flex flex-col overflow-auto ${wishlist.length === 0 ? '' : ''}`}>
+      <div className={`w-230 h-auto my-20 bg-white rounded-2xl flex flex-col overflow-auto ${wishlist.length === 0 ? '' : ''}`}>
         <div className='w-230 h-20 py-6 px-5 text-2xl text-gray-500 bg-white border-b-1 border-gray-500 shadow-xl rounded-t-2xl'>
           Wishlist - {wishlist.length} items
         </div>
@@ -22,7 +22,7 @@ const Favourites = () => {
         {/* Check if the wishlist is empty */}
         {wishlist.length === 0 ? (
           <div className='h-80 flex justify-center items-center'>
-            <p className='text-gray-500 text-5xl'>Your wishlist is empty ☹️</p>
+            <p className='text-gray-500 text-5xl'>Your wishlist is empty 💔</p>
           </div>
         ) : (
           wishlist.map((data) => (

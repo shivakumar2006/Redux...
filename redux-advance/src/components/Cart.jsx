@@ -3,11 +3,12 @@ import { MdDelete } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCartTotal, removeItem, increaseQuantity, decreaseQuantity, addToWishList } from '../features/CartSlice';
+import { getCartTotal, removeItem, increaseQuantity, decreaseQuantity } from '../features/CartSlice';
+import { addToWishList } from '../features/WishListSlice';
 
 const Cart = () => {
 
-    const { cart, totalQuantity, totalPrice } = useSelector((state) => state.allCart)
+    const { cart, totalQuantity, totalPrice } = useSelector((state) => state.allCart);
     const dispatch = useDispatch();
     const Navigate = useNavigate();
 
@@ -54,12 +55,14 @@ const Cart = () => {
                             >
                                 <MdDelete />
                             </button>
+
                             <button 
                                 className='w-12 h-10 mx-2 my-5 bg-red-500 px-4 shadow-xl rounded text-white hover:bg-red-700 cursor-pointer'
-                                onClick={() => dispatch(addToWishList(data.id))}
+                                onClick={() => dispatch(addToWishList(data))}
                             >
                                 <FaHeart />
                             </button>
+                            
                         </div>
                     </div>
                     <div className='w-70 h-80 my-5 flex flex-col justify-center items-center'>
