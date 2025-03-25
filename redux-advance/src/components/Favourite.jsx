@@ -44,10 +44,18 @@ const Favourites = () => {
                 >
                   <MdDelete />
                 </button>
+                <div className='h-10 w-40 my-10 flex items-center justify-center'>
+                    <button className='w-40 h-10 bg-purple-500 text-white rounded hover:bg-purple-700 shadow-xl'>
+                        Go to checkout
+                    </button>
+                </div>
               </div>
 
+                
+                   
+    
               {/* Display Price */}
-              <div className='w-70 h-80 my-5 flex flex-col justify-center items-center'>
+              <div className='w-70 h-50 my-25 flex flex-col justify-center items-center'>
                 <p className='text-2xl'>Price</p>
                 <p className='mx-3'>Rs.{data.price} /-</p>
               </div>

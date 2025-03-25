@@ -24,7 +24,7 @@ const Cart = () => {
               background: 'linear-gradient(90deg, rgba(171,3,245,1) 0%, rgba(96,47,140,1) 35%, rgba(44,105,156,1) 55%, rgba(0,212,255,1) 100%)'
             }}
         >   
-            <div className={`w-230 h-auto mb-55 mr-100 bg-white rounded-2xl flex flex-col overflow-auto ${cart.length === 0 ? 'mb-65' : ''}`}>
+            <div className={`w-230 h-auto mb-55 my-0 mt-20 mr-100 bg-white rounded-2xl flex flex-col overflow-auto ${cart.length === 0 ? 'mb-90' : ''}`}>
                 <div className='w-230 h-20 py-6 px-5 text-2xl text-gray-500 bg-white border-b-1 border-gray-500 shadow-xl rounded-t-2xl '>
                     Cart - {cart.length} items
                 </div>
