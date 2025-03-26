@@ -2,6 +2,8 @@ import React from 'react';
 import { MdDelete } from "react-icons/md";
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromWishlist } from '../features/WishListSlice';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Favourites = () => {
   const dispatch = useDispatch();
@@ -30,7 +32,7 @@ const Favourites = () => {
               
               {/* Product Image */}
               <div className='w-70 h-auto my-5'>
-                <img className='object-center transform transition-transform duration-300 hover:scale-105' src={data.img} alt={data.title} />
+                <LazyLoadImage className='object-center transform transition-transform duration-300 hover:scale-105 cursor-pointer' src={data.img} alt={data.title} />
               </div>
 
               {/* Product Details */}
@@ -45,7 +47,7 @@ const Favourites = () => {
                   <MdDelete />
                 </button>
                 <div className='h-10 w-40 my-10 flex items-center justify-center'>
-                    <button className='w-40 h-10 bg-purple-500 text-white rounded hover:bg-purple-700 shadow-xl'>
+                    <button className='w-40 h-10 bg-purple-500 text-white rounded hover:bg-purple-700 shadow-xl cursor-pointer'>
                         Go to checkout
                     </button>
                 </div>

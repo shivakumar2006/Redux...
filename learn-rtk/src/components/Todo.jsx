@@ -20,18 +20,18 @@ const Todo = ({ setEditId, setInput }) => {
                     key={todo.id}>
                         {todo.text}
                     <div className="flex space-x-2">
-                    <button className="bg-red-500 flex justify-center items-center rounded w-13 h-10 text-white text-2xl hover:bg-indigo-500 cursor-pointer"
-                        onClick={() => {
-                            setEditId(todo.id) // set edit mode 
-                            setInput(todo.text); // Fill inout with current todo text
-                        }}
-                    >
-                        <RxUpdate />
-                    </button>
-                    <button className="bg-red-500 flex justify-center items-center rounded w-13 h-10 text-white text-3xl hover:bg-indigo-500 cursor-pointer" 
-                        onClick={() => dispatch(removeToDo(todo.id))}>
-                        <MdDelete />
-                    </button>
+                        <button className="bg-red-500 flex justify-center items-center rounded w-13 h-10 text-white text-2xl hover:bg-indigo-500 cursor-pointer"
+                            onClick={() => {
+                                setEditId(todo.id) // set edit mode 
+                                setInput(todo.text); // Fill inout with current todo text
+                            }}
+                        >
+                            <RxUpdate />
+                        </button>
+                        <button className="bg-red-500 flex justify-center items-center rounded w-13 h-10 text-white text-3xl hover:bg-indigo-500 cursor-pointer" 
+                            onClick={() => dispatch(removeToDo(todo.id))}>
+                            <MdDelete />
+                        </button>
                     </div>
                 </li>
             ))}

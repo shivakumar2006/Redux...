@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import { MdDelete } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCartTotal, removeItem, increaseQuantity, decreaseQuantity } from '../features/CartSlice';
 import { addToWishList } from '../features/WishListSlice';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Cart = () => {
 
     const { cart, totalQuantity, totalPrice } = useSelector((state) => state.allCart);
     const dispatch = useDispatch();
     const Navigate = useNavigate();
+    const [ loaded, setLoaded ] = useState();
 
     useEffect(() => {
         dispatch(getCartTotal());
@@ -24,7 +27,7 @@ const Cart = () => {
               background: 'linear-gradient(90deg, rgba(171,3,245,1) 0%, rgba(96,47,140,1) 35%, rgba(44,105,156,1) 55%, rgba(0,212,255,1) 100%)'
             }}
         >   
-            <div className={`w-230 h-auto mb-55 my-0 mt-20 mr-100 bg-white rounded-2xl flex flex-col overflow-auto ${cart.length === 0 ? 'mb-90' : ''}`}>
+            <div className={`w-230 h-auto mb-80 my-0 mt-20 mr-100 bg-white rounded-2xl flex flex-col overflow-auto ${cart.length === 0 ? 'mb-90' : ''}`}>
                 <div className='w-230 h-20 py-6 px-5 text-2xl text-gray-500 bg-white border-b-1 border-gray-500 shadow-xl rounded-t-2xl '>
                     Cart - {cart.length} items
                 </div>
@@ -37,8 +40,14 @@ const Cart = () => {
                 ) : (
                 cart?.map((data, index) => (
                 <div key={index} className='w-230 h-90 border-b-1 border-gray-500 shadow-xl flex flex-row justify-evenly '>
-                    <div className='w-70 h-auto my-5'>
-                        <img className='object-center transform transition-transform duration-300 hover:scale-105' src={data.img} />
+                    <div className='w-70 h-auto my-5 overflow-hidden group'>
+                        <LazyLoadImage 
+                            className={`object-cover transform transition-transform duration-500 ease-in-out will-change-transform cursor-pointer ${loaded ? "hover:scale-105" : ''}`} 
+                            src={data.img} 
+                            height="300px"
+                            width='300px'
+                            onLoad={() => setLoaded(true)}
+                        />
                     </div>
                     <div className='w-70 h-80 my-5 flex flex-col'>
                         <h1 

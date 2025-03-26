@@ -1,6 +1,8 @@
 import React from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../features/CartSlice';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const ProductsCards = () => {
 
@@ -11,9 +13,10 @@ const ProductsCards = () => {
         <div className='w-screen h-screen mt-25 flex flex-wrap justify-between text-black'>
             {items?.map((item) => (
             <div key={item.id} className='w-100 h-100 my-5 mx-5 rounded-2xl bg-gray-200 overflow-hidden shadow-xl'>
-                <img 
+                <LazyLoadImage 
                     src={item.img}
-                    className='w-100 h-55 rounded-t-2xl bg-gray-500 object-contain cursor-pointer transform transition-transform duration-300 hover:scale-105'
+                    className='w-100 h-55 rounded-t-2xl bg-gray-500 object-contain cursor-pointer transform transition-transform duration-500 hover:scale-105'
+                    // effect='blur'                    
                 />
                 <h1 className='my-2 mx-4 text-2xl '>{item.title}</h1>
                 <p className='my-3 mx-4'>
