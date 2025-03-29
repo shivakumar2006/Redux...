@@ -1,11 +1,12 @@
 import React from 'react'; 
 import { BarLoader } from 'react-spinners';
+import { NavLink } from 'react-router-dom';
 import { useGetStudentsQuery, useDeleteStudentsMutation } from '../features/studentSlice';
 
 const Read = () => {
 
     const { data: students, isLoading, isSuccess, isError } = useGetStudentsQuery();
-    const { deleteStudents } = useDeleteStudentsMutation();
+    const [ deleteStudents ] = useDeleteStudentsMutation();
 
     if(isLoading) {
         return <div className='w-screen h-screen flex justify-center items-center'><BarLoader /></div>
@@ -19,7 +20,7 @@ const Read = () => {
 
     return (
         <div className='w-screen h-screen'>
-            <h1 className="my-5 text-3xl flex justify-center items-center">Read</h1> 
+            <h1 className="my-5 text-3xl flex justify-center items-center">Read</h1>
             <div className='flex flex-row flex-wrap justify-evenly items-center'>
             {isSuccess && 
                 students?.map((student) => (
@@ -30,7 +31,7 @@ const Read = () => {
                         <div className='w-full text-blue-400 flex flex-row justify-evenly items-center'>
                             <button 
                                 className='w-20 h-10 bg-blue-500 text-white rounded shadow-xl hover:bg-blue-600'
-                                onClick={() => deleteStudents()}
+                                onClick={() => deleteStudents(student?.id)}
                             >
                                 Delete
                             </button>
@@ -38,7 +39,7 @@ const Read = () => {
                                 className='w-20 h-10 bg-red-500 text-white rounded shadow-xl hover:bg-red-600'
                                 
                             >
-                                Update
+                                <NavLink to={`/edit/${student?.id}`}>Update</NavLink>
                             </button>
                         </div>
                     </div>
