@@ -20,7 +20,7 @@ export const cartSlice = createSlice({
             } else {
                 state.cart.push({ ...action.payload, quantity: 1 });
                 state.uniqueItemsCount += 1; //only increase for new item
-            }
+            } 
             cartSlice.caseReducers.getCartTotal(state); // update total after adding...
         },
         getCartTotal: (state) => {
@@ -41,6 +41,7 @@ export const cartSlice = createSlice({
         },
         removeItem: (state, action) => {
             state.cart = state.cart.filter((item) => item.id !== action.payload);
+            state.uniqueItemsCount -= 1; // only decrease when the items delete from the cart...
         },
         increaseQuantity: (state, action) => {
             state.cart = state.cart.map((item) => {

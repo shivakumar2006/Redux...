@@ -40,7 +40,7 @@ const Favourites = () => {
               
               {/* Product Image */}
               <div className='w-70 h-auto my-5'>
-                <LazyLoadImage className='object-center transform transition-transform duration-300 hover:scale-105 cursor-pointer' src={data.img} alt={data.title} />
+                <LazyLoadImage className='object-center transform transition-transform duration-300 hover:scale-105 cursor-pointer' src={data.img} alt={data.title} effect='opacity' />
               </div>
 
               {/* Product Details */}
@@ -71,10 +71,7 @@ const Favourites = () => {
                     </button>
                 </div>
               </div>
-
-                
-                   
-    
+              
               {/* Display Price */}
               <div className='w-70 h-50 my-25 flex flex-col justify-center items-center'>
                 <p className='text-2xl'>Price</p>
