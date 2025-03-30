@@ -44,6 +44,7 @@ const Cart = () => {
                         <LazyLoadImage 
                             className={`object-cover transform transition-transform duration-500 ease-in-out will-change-transform cursor-pointer ${loaded ? "hover:scale-105" : ''}`} 
                             src={data.img} 
+                            effect='opacity'
                             height="300px"
                             width='300px'
                             onLoad={() => setLoaded(true)}

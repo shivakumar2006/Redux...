@@ -1,13 +1,21 @@
 import React from 'react';
 import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromWishlist } from '../features/WishListSlice';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { MdShoppingCart } from "react-icons/md";
+import { addToCart } from '../features/CartSlice';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Favourites = () => {
   const dispatch = useDispatch();
+  const Navigate = useNavigate();
   const { wishlist } = useSelector((state) => state.fullWishList);
+
+  const handleClick = () => {
+    Navigate("/check")
+  }
 
   return (
     <div
@@ -40,14 +48,25 @@ const Favourites = () => {
                 <h1 className='text-2xl my-5 text-gray-700'>{data.title}</h1>
                 
                 {/* Remove from Wishlist */}
+                <div>
                 <button
                   className='w-12 h-10 my-5 mx-2 bg-blue-500 px-4 shadow-xl rounded text-white hover:bg-blue-700 cursor-pointer'
                   onClick={() => dispatch(removeFromWishlist(data.id))}
                 >
                   <MdDelete />
                 </button>
+                <button
+                  className='w-12 h-10 my-5 mx-2 bg-indigo-500 px-4 shadow-xl rounded text-white hover:bg-indigo-600 cursor-pointer'
+                  onClick={() => dispatch(addToCart(data))}
+                >
+                  <MdShoppingCart />
+                </button>
+                </div>
                 <div className='h-10 w-40 my-10 flex items-center justify-center'>
-                    <button className='w-40 h-10 bg-purple-500 text-white rounded hover:bg-purple-700 shadow-xl cursor-pointer'>
+                    <button 
+                      className='w-40 h-10 bg-purple-500 text-white rounded hover:bg-purple-700 shadow-xl cursor-pointer'
+                      onClick={handleClick}
+                    >
                         Go to checkout
                     </button>
                 </div>

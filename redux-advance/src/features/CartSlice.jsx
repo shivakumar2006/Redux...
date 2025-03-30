@@ -6,6 +6,7 @@ const initialState = {
     items: ProductData,
     totalQuantity: 0,
     totalPrice: 0,
+    uniqueItemsCount: 0, //New Property
 };
 
 export const cartSlice = createSlice({
@@ -18,6 +19,7 @@ export const cartSlice = createSlice({
                 state.cart[find].quantity += 1;
             } else {
                 state.cart.push({ ...action.payload, quantity: 1 });
+                state.uniqueItemsCount += 1; //only increase for new item
             }
             cartSlice.caseReducers.getCartTotal(state); // update total after adding...
         },
@@ -46,7 +48,8 @@ export const cartSlice = createSlice({
                     return { ...item, quantity: item.quantity + 1 };
                 }
                 return item;
-            })
+            }),
+            cartSlice.caseReducers.getCartTotal(state); // Recalculates total
         },
         decreaseQuantity: (state, action) => {
             state.cart = state.cart.map((item) => {
@@ -56,7 +59,8 @@ export const cartSlice = createSlice({
                     }
                 }
                 return item;
-            })
+            }),
+            cartSlice.caseReducers.getCartTotal(state); // Recalculates total
         },
     },
 })

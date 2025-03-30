@@ -8,10 +8,11 @@ import { HiMiniShoppingBag } from "react-icons/hi2";
 
 const Navbar = () => {
 
-    const { totalQuantity } = useSelector((state) => state.allCart);
+    const { uniqueItemsCount } = useSelector((state) => state.allCart);
     const { totalWishlistQuantity } = useSelector((state) => state.fullWishList);
 
     useEffect(() => {}, [totalWishlistQuantity])
+
 
     return (
         <div className='w-full h-20 text-white bg-blue-500 flex flex-row justify-between items-center shadow-2xl fixed top-0 left-0 z-50'>
@@ -25,11 +26,11 @@ const Navbar = () => {
                     className="w-20 h-20 flex items-center cursor-pointer text-white rounded-full transition-all duration-300"
                 >
                     <MdShoppingCart className='text-2xl' /> cart
-                    {totalQuantity > 0 && (
+                    {uniqueItemsCount > 0 && (
                         <div 
                         className="w-5 h-5 mb-5 text-1xl bg-red-500 rounded-full text-white flex items-center justify-center"
                     >
-                        {totalQuantity}
+                        {uniqueItemsCount}
                     </div>
                     )}
                         
