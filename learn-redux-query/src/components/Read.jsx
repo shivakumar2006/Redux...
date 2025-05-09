@@ -30,13 +30,13 @@ const Read = () => {
                         <h1 className='text-gray-500 text-3xl'>{student?.studentEmail}</h1>
                         <div className='w-full text-blue-400 flex flex-row justify-evenly items-center'>
                             <button 
-                                className='w-20 h-10 bg-blue-500 text-white rounded shadow-xl hover:bg-blue-600'
+                                className='w-20 h-10 bg-blue-500 text-white rounded shadow-xl hover:bg-blue-600 cursor-pointer'
                                 onClick={() => deleteStudents(student?.id)}
                             >
                                 Delete
                             </button>
                             <button 
-                                className='w-20 h-10 bg-red-500 text-white rounded shadow-xl hover:bg-red-600'
+                                className='w-20 h-10 bg-red-500 text-white rounded shadow-xl hover:bg-red-600 cursor-pointer'
                                 
                             >
                                 <NavLink to={`/edit/${student?.id}`}>Update</NavLink>
